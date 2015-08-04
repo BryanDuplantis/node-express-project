@@ -5,12 +5,12 @@ router.get('/', function (req, res) {
   res.send('Welcome To My App!');
 });
 
-router.get('/about', function (req, res, next) {
+router.get('/templates/about', function (req, res, next) {
   res.send('This Is About Me!');
   next();
 });
 
-router.get('/contact', function (req, res) {
+router.get('/templates/contact', function (req, res) {
   res.send('This Is My Contact Information');
 });
 
