@@ -8,6 +8,8 @@ var contact = require('./routes/contact');
 
 var app = express();
 
+require('./lib/secrets');
+
 app.set('view engine', 'ejs');
 
 app.locals.title = "Bryan Duplantis";
