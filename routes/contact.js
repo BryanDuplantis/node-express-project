@@ -1,25 +1,35 @@
 var express = require('express');
-var router = express.Router();
 var nodemailer = require('nodemailer');
-var transporter = nodemailer.createTransport();
+
+var router = express.Router();
+
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'duplantis@gmail.com',
+      pass: 'vm87LAd3eElF'
+    },
+});
 
 router.get('/', function (req, res) {
   res.render('templates/contact');
-    transporter.sendMail({from: 'duplantis@gmail.com', to: 'duplantis@gmail.com', subject: 'Thanks for contacting me!', text: 'It is great to hear from you.'});
-    console.log('test email sent');
-});
+})
 
-// router.get('/contact', function (req, res) {
-//   console.log(req.body.name);
-//   console.log(req.body.mail);
-//   console.log(req.body.msg);
-//   transporter.sendMail({
-//     from: 'duplantis@gmail',
-//     to: 'receiver@address',
-//     subject: 'hello',
-//     text: 'hello world!'
-//   // res.send('Thanks for submitting!');
-//   });
-// });
+router.post('/send', function (req, res) {
+  console.log(req.body);
+    transporter.sendMail({
+      from: req.body.name,
+      to: 'duplantis@gmail.com',
+      subject: req.body.subject,
+      text: req.body.comment
+    }, function (err, info) {
+      if(err){
+        console.log(err);
+      }else{
+        console.log(info);
+      }
+    });
+    res.redirect('/')
+})
 
 module.exports = router;
