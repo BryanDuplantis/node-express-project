@@ -7,7 +7,7 @@ var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
       user: 'duplantis@gmail.com',
-      pass: 'vm87LAd3eElF'
+      pass: ''
     },
 });
 
@@ -18,8 +18,8 @@ router.get('/', function (req, res) {
 router.post('/send', function (req, res) {
   console.log(req.body);
     transporter.sendMail({
-      from: req.body.name,
       to: 'duplantis@gmail.com',
+      from: req.body.name,
       subject: req.body.subject,
       text: req.body.comment
     }, function (err, info) {
